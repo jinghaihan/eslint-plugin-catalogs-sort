@@ -5,17 +5,82 @@
 [![JSDocs][jsdocs-src]][jsdocs-href]
 [![License][license-src]][license-href]
 
-## Rules
+Sort dependency fields in `package.json` by `catalog` groups, with autofix.
+
+## Install
+
+```bash
+pnpm add -D eslint-plugin-catalogs-sort
+```
+
+## Quick Start (ESLint Flat Config)
+
+```ts
+import { configs } from 'eslint-plugin-catalogs-sort'
+
+export default [
+  ...configs.recommended,
+]
+```
+
+## Rule
 
 - `catalogs-sort/catalogs-sort`
-  - Source: [src/rules/catalogs-sort.ts](https://github.com/jinghaihan/eslint-plugin-catalogs-sort/blob/main/src/rules/catalogs-sort.ts)
-  - Supports autofix and sorts:
-    - `dependencies`
-    - `devDependencies`
-    - `peerDependencies`
-    - `optionalDependencies`
-    - `resolutions`
-    - `pnpm.overrides`
+- Source: [src/rules/catalogs-sort.ts](https://github.com/jinghaihan/eslint-plugin-catalogs-sort/blob/main/src/rules/catalogs-sort.ts)
+- Fixable: `code`
+
+Default fields:
+
+- `dependencies`
+- `devDependencies`
+- `peerDependencies`
+- `optionalDependencies`
+- `resolutions`
+- `pnpm.overrides`
+
+Options:
+
+| Option | Type | Default | Description |
+| --- | --- | --- | --- |
+| `fields` | `string[]` | built-in list above | Field paths to sort |
+| `catalogOrder` | `string[]` | `[]` | Custom catalog group order |
+| `otherGroupPosition` | `'first' \| 'last'` | `'last'` | Position of non-`catalog:` group |
+
+## Example
+
+Before:
+
+```json
+{
+  "dependencies": {
+    "@repo/config": "workspace:*",
+    "@vueuse/core": "catalog:vue",
+    "axios": "catalog:shared",
+    "dayjs": "^1.11.13",
+    "pinia": "catalog:vue",
+    "vue": "catalog:vue",
+    "vue-router": "catalog:vue",
+    "zod": "catalog:shared"
+  }
+}
+```
+
+After `eslint --fix`:
+
+```json
+{
+  "dependencies": {
+    "axios": "catalog:shared",
+    "zod": "catalog:shared",
+    "@vueuse/core": "catalog:vue",
+    "pinia": "catalog:vue",
+    "vue": "catalog:vue",
+    "vue-router": "catalog:vue",
+    "@repo/config": "workspace:*",
+    "dayjs": "^1.11.13"
+  }
+}
+```
 
 ## License
 

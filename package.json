@@ -48,19 +48,19 @@
     "jsonc-eslint-parser": "catalog:prod"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "catalog:lint",
-    "@types/node": "catalog:types",
+    "tsdown": "catalog:build",
     "bumpp": "catalog:dev",
-    "eslint": "catalog:lint",
-    "eslint-vitest-rule-tester": "catalog:test",
-    "lint-staged": "catalog:lint",
     "pncat": "catalog:dev",
     "simple-git-hooks": "catalog:dev",
     "taze": "catalog:dev",
-    "tsdown": "catalog:build",
     "tsx": "catalog:dev",
     "typescript": "catalog:dev",
-    "vitest": "catalog:test"
+    "@antfu/eslint-config": "catalog:lint",
+    "eslint": "catalog:lint",
+    "lint-staged": "catalog:lint",
+    "eslint-vitest-rule-tester": "catalog:test",
+    "vitest": "catalog:test",
+    "@types/node": "catalog:types"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"

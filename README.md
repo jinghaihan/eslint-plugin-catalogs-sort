@@ -5,6 +5,18 @@
 [![JSDocs][jsdocs-src]][jsdocs-href]
 [![License][license-src]][license-href]
 
+## Rules
+
+- `catalogs-sort/catalogs-sort`
+  - Source: [src/rules/catalogs-sort.ts](https://github.com/jinghaihan/eslint-plugin-catalogs-sort/blob/main/src/rules/catalogs-sort.ts)
+  - Supports autofix and sorts:
+    - `dependencies`
+    - `devDependencies`
+    - `peerDependencies`
+    - `optionalDependencies`
+    - `resolutions`
+    - `pnpm.overrides`
+
 ## License
 
 [MIT](./LICENSE) License © [jinghaihan](https://github.com/jinghaihan)

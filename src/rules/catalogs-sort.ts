@@ -77,15 +77,15 @@ export default createCatalogsSortRule<Options>({
         catalogOrder,
         otherGroupPosition,
       })
-      const current = context.sourceCode.getText(node as any)
+      const current = context.sourceCode.text.slice(node.range[0], node.range[1])
       if (replacement === current)
         continue
 
       context.report({
-        node: node as any,
+        loc: node.loc,
         messageId: 'unexpectedOrder',
         data: { field },
-        fix: fixer => fixer.replaceText(node as any, replacement),
+        fix: fixer => fixer.replaceTextRange(node.range, replacement),
       })
     }
 

@@ -19,6 +19,10 @@ interface SortDependencyObjectOptions {
   otherGroupPosition: 'first' | 'last'
 }
 
+interface RangeNode {
+  range: [number, number]
+}
+
 const CATALOG_PREFIX = 'catalog:'
 const OTHER_GROUP = '__other__'
 
@@ -113,11 +117,11 @@ function toObjectText(
   sorted: SortedItems,
 ): string {
   if (!sorted.items.length)
-    return sourceCode.getText(objectNode as any)
+    return getTextByRange(sourceCode, objectNode)
 
   const isMultiLine = objectNode.loc.start.line !== objectNode.loc.end.line
   if (!isMultiLine)
-    return toSingleLineObjectText(sourceCode.getText(objectNode as any), sorted.items, sourceCode)
+    return toSingleLineObjectText(getTextByRange(sourceCode, objectNode), sorted.items, sourceCode)
 
   const lineBreak = sourceCode.text.includes('\r\n') ? '\r\n' : '\n'
   const firstProperty = sorted.items[0].property
@@ -132,7 +136,7 @@ function toObjectText(
   for (const [index, item] of sorted.items.entries()) {
     if (index > 0)
       body += `,${lineBreak}`
-    body += `${propertyIndent}${sourceCode.getText(item.property as any)}`
+    body += `${propertyIndent}${getTextByRange(sourceCode, item.property)}`
   }
 
   return `{${lineBreak}${body}${lineBreak}${closeIndent}}`
@@ -146,7 +150,7 @@ function toSingleLineObjectText(
   const hasSpaceAfterOpen = /^\{\s+/.test(current)
   const hasSpaceBeforeClose = /\s+\}$/.test(current)
   const body = sortedItems
-    .map(item => sourceCode.getText(item.property as any))
+    .map(item => getTextByRange(sourceCode, item.property))
     .join(', ')
 
   if (!body)
@@ -187,4 +191,11 @@ function getPropertyName(property: AST.JSONProperty): string {
     return property.key.name
 
   return ''
+}
+
+function getTextByRange(
+  sourceCode: Rule.RuleContext['sourceCode'],
+  node: RangeNode,
+): string {
+  return sourceCode.text.slice(node.range[0], node.range[1])
 }

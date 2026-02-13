@@ -16,6 +16,7 @@ catalogs:
   prod:
     jsonc-eslint-parser: ^2.4.2
   test:
+    '@vitest/coverage-v8': 4.0.18
     eslint-vitest-rule-tester: ^3.1.0
     vitest: ^4.0.18
   types:

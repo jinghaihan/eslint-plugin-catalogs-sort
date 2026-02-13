@@ -58,6 +58,7 @@
     "@antfu/eslint-config": "catalog:lint",
     "eslint": "catalog:lint",
     "lint-staged": "catalog:lint",
+    "@vitest/coverage-v8": "catalog:test",
     "eslint-vitest-rule-tester": "catalog:test",
     "vitest": "catalog:test",
     "@types/node": "catalog:types"

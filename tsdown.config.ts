@@ -6,4 +6,5 @@ export default defineConfig({
   dts: {
     resolver: 'tsc',
   },
+  external: ['eslint'],
 })

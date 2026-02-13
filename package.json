@@ -1,0 +1,71 @@
+{
+  "name": "eslint-plugin-catalogs-sort",
+  "type": "module",
+  "version": "0.0.0",
+  "packageManager": "pnpm@10.29.3",
+  "description": "An ESLint plugin that sorts package.json dependencies by catalog group and package name.",
+  "author": "jinghaihan",
+  "license": "MIT",
+  "homepage": "https://github.com/jinghaihan/eslint-plugin-catalogs-sort#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jinghaihan/eslint-plugin-catalogs-sort.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jinghaihan/eslint-plugin-catalogs-sort/issues"
+  },
+  "keywords": [
+    "eslint",
+    "plugin",
+    "catalogs",
+    "catalog",
+    "sort"
+  ],
+  "sideEffects": false,
+  "exports": {
+    ".": "./dist/index.js",
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "start": "tsx ./src/index.ts",
+    "build": "tsdown",
+    "deps": "taze major -I",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest",
+    "release": "bumpp",
+    "bootstrap": "pnpm install",
+    "prepare": "simple-git-hooks",
+    "prepublishOnly": "pnpm build"
+  },
+  "dependencies": {
+    "jsonc-eslint-parser": "catalog:prod"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "catalog:lint",
+    "@types/node": "catalog:types",
+    "bumpp": "catalog:dev",
+    "eslint": "catalog:lint",
+    "eslint-vitest-rule-tester": "catalog:test",
+    "lint-staged": "catalog:lint",
+    "pncat": "catalog:dev",
+    "simple-git-hooks": "catalog:dev",
+    "taze": "catalog:dev",
+    "tsdown": "catalog:build",
+    "tsx": "catalog:dev",
+    "typescript": "catalog:dev",
+    "vitest": "catalog:test"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
+  }
+}
